@@ -1,0 +1,35 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+
+        <item name="android:allowBackup">false</item>
+
+        <item name="colorPrimary">#fff</item>
+        <item name="colorPrimaryDark">#999</item>
+        <item name="colorAccent">#D81B60</item>
+
+        <item name="android:windowBackground">#FFF0EE</item>
+        <item name="actionBarStyle">@style/MyActionBar</item>
+
+    </style>
+
+    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:allowBackup">false</item>
+
+        <item name="colorPrimary">#fff</item>
+        <item name="colorPrimaryDark">#999</item>
+        <item name="colorAccent">#D81B60</item>
+
+        <item name="android:windowBackground">#FFF0EE</item>
+        <item name="actionBarStyle">@style/MyActionBar</item>
+    </style>
+
+    <style name="MyActionBar" parent="@style/Widget.AppCompat.ActionBar.Solid">
+        <item name="titleTextStyle">@style/MyTitleTextStyle</item>
+    </style>
+
+    <style name="MyTitleTextStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">#000</item>
+    </style>
+
+</resources>

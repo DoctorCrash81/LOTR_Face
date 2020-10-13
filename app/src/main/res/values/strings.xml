@@ -1,0 +1,45 @@
+<resources>
+
+
+    <string name="facebook_app_id" translatable="false">498939567525120</string>
+<!--    <string name="fb_login_protocol_scheme" translatable="false">fb2551388838522550</string>-->
+
+    <string name="app_name">Beauty Scanner</string>
+    <string name="could_not_detect_face">Could not detect face</string>
+    <string name="choose_another_photo">Choose another photo</string>
+    <string name="choose_photo">Choose a photo</string>
+    <string name="data_processing">Data processing...</string>
+    <string name="try_again">Try again</string>
+    <string name="network_connection">Cant load data. Please check your network connection and try again</string>
+    <string name="photo_saved_successfully">Photo saved successfully</string>
+    <string name="please_use_greetify">Please use <b>#Greetify</b></string>
+    <string name="save_to_gallery">Save To Gallery</string>
+    <string name="photo_saved">Photo saved successfully!</string>
+    <string name="p_saved">Photo saved!</string>
+
+    <string name="your_beauty_score_in">Your Beauty Score is </string>
+
+    <string name="face_shape">Face shape</string>
+    <string name="cheekbones">Cheekbones</string>
+    <string name="eyes">Eyes</string>
+    <string name="nose">Nose</string>
+    <string name="proportions">Proportions</string>
+    <string name="eyebrows">Eyebrows</string>
+    <string name="chin">Chin</string>
+    <string name="lips">Lips</string>
+    <string name="gallery">Gallery</string>
+    <string name="send">Send</string>
+
+    <string name="perfect">PERFECT</string>
+
+    <string name="_3_days_free">Try 3 Days for Only</string>
+    <string name="then">Then</string>
+    <string name="_week">/ week</string>
+    <string name="big_sale">BIG SALE!</string>
+    <string name="contin">Continue</string>
+
+    <string name="get_result">Get the result</string>
+
+    <string name="cancel_subscriptions">Cancel anytime in Subscriptions on Google Play</string>
+
+</resources>

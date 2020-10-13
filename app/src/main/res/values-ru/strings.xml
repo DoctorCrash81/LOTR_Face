@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Индекс красоты</string>
+    <string name="could_not_detect_face">Не удалось обнаружить лицо</string>
+    <string name="choose_another_photo">Выберите другое фото</string>
+    <string name="choose_photo">Выберите фото</string>
+    <string name="data_processing">Анализ данных...</string>
+    <string name="try_again">Попробуй еще раз</string>
+    <string name="network_connection">Не могу загрузить данные. Пожалуйста, проверьте подключение к сети и попробуйте снова</string>
+    <string name="photo_saved_successfully">Фото успешно сохранено</string>
+    <string name="please_use_greetify">Пожалуйста, используйте\nхештег <b>#Greetify</b></string>
+    <string name="save_to_gallery">Сохранить в галерею</string>
+    <string name="photo_saved">Фото успешно сохранено!</string>
+    <string name="p_saved">Фото сохранено!</string>
+
+    <string name="your_beauty_score_in">Ваш индекс красоты </string>
+
+    <string name="face_shape">Форма лица</string>
+    <string name="cheekbones">Скулы</string>
+    <string name="eyes">Глаза</string>
+    <string name="nose">Нос</string>
+    <string name="proportions">Пропорции</string>
+    <string name="eyebrows">Брови</string>
+    <string name="chin">Подбородок</string>
+    <string name="lips">Губы</string>
+    <string name="gallery">Галерея</string>
+    <string name="send">Отправить</string>
+
+    <string name="perfect">ИДЕАЛ!</string>
+
+    <string name="_3_days_free">Попробуй 3 дня всего за</string>
+    <string name="then">После</string>
+    <string name="_week">/ неделя</string>
+    <string name="big_sale">Выгодно!</string>
+    <string name="contin">Продолжить</string>
+
+    <string name="get_result">Получить результат</string>
+
+    <string name="cancel_subscriptions">Подписку можно отменить в разделе "Подписки" в Google Play в любой момент</string>
+
+</resources>
