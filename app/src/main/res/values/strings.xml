@@ -2,7 +2,7 @@
 
 
     <string name="facebook_app_id" translatable="false">498939567525120</string>
-<!--    <string name="fb_login_protocol_scheme" translatable="false">fb2551388838522550</string>-->
+    <string name="fb_login_protocol_scheme" translatable="false">fb498939567525120</string>
 
     <string name="app_name">Beauty Scanner</string>
     <string name="could_not_detect_face">Could not detect face</string>
