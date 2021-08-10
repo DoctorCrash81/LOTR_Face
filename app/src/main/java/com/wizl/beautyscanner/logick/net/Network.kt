@@ -3,6 +3,7 @@ package com.wizl.beautyscanner.logick.net
 import android.os.Handler
 import com.wizl.beautyscanner.App
 import com.wizl.beautyscanner.model.BeautyModelSerializable
+import com.wizl.beautyscanner.model.FaceForPost
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -52,7 +53,9 @@ class Network {
 
     fun getResult(
         file: File,
-        onResponse: (BeautyModelSerializable) -> Unit,
+        gender: Boolean,
+        //onResponse: (BeautyModelSerializable) -> Unit,
+        onResponse: (FaceForPost) -> Unit,
         onFailure: (t: Throwable) -> Unit,
         onServerError: (code: Int, message: String) -> Unit
     ) {
@@ -72,9 +75,50 @@ class Network {
                 file.name,
                 photoFileRB
             )
+
+        //MultipartBody.Part.createFormData()
+
+       //photoFileParameter
+
+        var str_gender = "dc2_female"
+        if (gender) str_gender = "dc2_male"
+
+        val dataset = RequestBody.create("multipart/form-data".toMediaTypeOrNull(),str_gender)
+            //MultipartBody.Part.createFormData("dataset ","dc2_male")
+        val count = RequestBody.create("multipart/form-data".toMediaTypeOrNull(),"3")
+            //MultipartBody.Part.createFormData("count  ","1")
+
         Thread {
-            mServerApi?.getBeautyByPhoto(headers, photoFileParameter)
+            mServerApi?.getBeautyByPhoto(headers,photoFileParameter,dataset, count)
                 ?.enqueue(object :
+                    Callback<FaceForPost> {
+                    override fun onFailure(call: Call<FaceForPost>, t: Throwable) {
+                        handler.post {
+                            onFailure(t)
+                        }
+                    }
+
+                    override fun onResponse(
+                        call: Call<FaceForPost>,
+                        response: Response<FaceForPost>
+                    ) {
+                        when {
+                            response.body() != null && response.code() == 200 -> handler.post {
+                                onResponse(response.body()!!)
+                            }
+                            else -> handler.post {
+                                onServerError(response.code(), response.message())
+                            }
+                        }
+                    }
+
+                })
+        }.start()
+
+        /*
+        *        Thread {
+            mServerApi?.getBeautyByPhoto(headers, photoFileParameter)
+                    ?.enqueue(object :
                     Callback<BeautyModelSerializable> {
                     override fun onFailure(call: Call<BeautyModelSerializable>, t: Throwable) {
                         handler.post {
@@ -98,7 +142,7 @@ class Network {
 
                 })
         }.start()
-
+        * */
 
     }
 

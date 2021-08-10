@@ -67,7 +67,7 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/_img"
+        android:id="@+id/_imgMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="matrix"

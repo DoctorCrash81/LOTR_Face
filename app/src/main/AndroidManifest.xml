@@ -12,7 +12,7 @@
         android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="@string/your_dc_lookalike"
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
@@ -37,10 +37,10 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.GalleryActivity"
             android:screenOrientation="portrait" />
@@ -54,13 +54,13 @@
             android:name=".ui.PaywallActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.WhoIsActivity"
+            android:screenOrientation="portrait" />
 
         <receiver
             android:name=".NotificationReceiver"
-            android:enabled="true">
-        </receiver>
-
-
+            android:enabled="true"></receiver>
     </application>
 
 </manifest>

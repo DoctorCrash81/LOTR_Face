@@ -1,11 +1,15 @@
 package com.wizl.beautyscanner.logick
 
 import android.graphics.Bitmap
+import android.graphics.Path
+import android.net.Uri
 import android.os.Environment
 import android.os.Handler
 import android.os.StrictMode
+import androidx.core.net.toUri
 import com.wizl.beautyscanner.logick.helpers.ImageHelper
 import java.io.File
+import java.net.URI
 import java.util.*
 
 class FileService private constructor() {
@@ -66,5 +70,10 @@ class FileService private constructor() {
         ) {
             complete(it)
         }
+    }
+
+    fun getBeautyPath(): Uri {
+        return Uri.fromFile(pathPhotoBeauty)
+        //return p.toUri()
     }
 }

@@ -55,61 +55,61 @@ class ResultView : LinearLayout {
     private var mBeautyModel: BeautyModel? = null
 
     private fun removeOnGlobalLayoutListener1() {
-        _oval1.viewTreeObserver.removeOnGlobalLayoutListener(listener1)
+        //_oval1.viewTreeObserver.removeOnGlobalLayoutListener(listener1)
     }
 
     private val listener1 = ViewTreeObserver.OnGlobalLayoutListener {
         val location = IntArray(2)
-        _oval1.getLocationOnScreen(location)
+       // _oval1.getLocationOnScreen(location)
         val x = location[0].toFloat()
         val y = location[1].toFloat()
         x1 = x
-        y1 = y + _oval1.height / 2
+        //y1 = y + _oval1.height / 2
         updateLine()
         removeOnGlobalLayoutListener1()
     }
 
     private fun removeOnGlobalLayoutListener2() {
-        _oval2.viewTreeObserver.removeOnGlobalLayoutListener(listener2)
+       // _oval2.viewTreeObserver.removeOnGlobalLayoutListener(listener2)
     }
 
     private val listener2 = ViewTreeObserver.OnGlobalLayoutListener {
         val location = IntArray(2)
-        _oval2.getLocationOnScreen(location)
+       // _oval2.getLocationOnScreen(location)
         val x = location[0].toFloat()
         val y = location[1].toFloat()
         x2 = x
-        y2 = y + _oval1.height / 2
+       // y2 = y + _oval1.height / 2
         updateLine()
         removeOnGlobalLayoutListener2()
     }
 
     private fun removeOnGlobalLayoutListener3() {
-        _oval3.viewTreeObserver.removeOnGlobalLayoutListener(listener3)
+      //  _oval3.viewTreeObserver.removeOnGlobalLayoutListener(listener3)
     }
 
     private val listener3 = ViewTreeObserver.OnGlobalLayoutListener {
         val location = IntArray(2)
-        _oval3.getLocationOnScreen(location)
+      //  _oval3.getLocationOnScreen(location)
         val x = location[0].toFloat()
         val y = location[1].toFloat()
         x3 = x
-        y3 = y + _oval1.height / 2
+       // y3 = y + _oval1.height / 2
         updateLine()
         removeOnGlobalLayoutListener3()
     }
 
     private fun removeOnGlobalLayoutListener4() {
-        _oval1.viewTreeObserver.removeOnGlobalLayoutListener(listener4)
+      //  _oval1.viewTreeObserver.removeOnGlobalLayoutListener(listener4)
     }
 
     private val listener4 = ViewTreeObserver.OnGlobalLayoutListener {
         val location = IntArray(2)
-        _oval4.getLocationOnScreen(location)
+       // _oval4.getLocationOnScreen(location)
         val x = location[0].toFloat()
         val y = location[1].toFloat()
         x4 = x
-        y4 = y + _oval1.height / 2
+       // y4 = y + _oval1.height / 2
         updateLine()
         removeOnGlobalLayoutListener4()
     }
@@ -128,16 +128,16 @@ class ResultView : LinearLayout {
     }
 
     private fun removeOnGlobalLayoutListenerImg() {
-        _img.viewTreeObserver.removeOnGlobalLayoutListener(listenerImg)
+        //_imgMain.viewTreeObserver.removeOnGlobalLayoutListener(listenerImg)
     }
 
     private val listenerImg = ViewTreeObserver.OnGlobalLayoutListener {
         val location = IntArray(2)
-        _img.getLocationOnScreen(location)
+       // _imgMain.getLocationOnScreen(location)
         xImg = location[0].toFloat()
         yImg = location[1].toFloat()
-        wImg = _img.width.toFloat()
-        hImg = _img.height.toFloat()
+       // wImg = _imgMain.width.toFloat()
+      //  hImg = _imgMain.height.toFloat()
         updateLine()
         removeOnGlobalLayoutListenerImg()
     }
@@ -145,13 +145,13 @@ class ResultView : LinearLayout {
     init {
         LayoutInflater.from(context)
             .inflate(R.layout.view_bs_result, this, true)
-
+/*
         _oval1.viewTreeObserver.addOnGlobalLayoutListener(listener1)
         _oval2.viewTreeObserver.addOnGlobalLayoutListener(listener2)
         _oval3.viewTreeObserver.addOnGlobalLayoutListener(listener3)
-        _oval4.viewTreeObserver.addOnGlobalLayoutListener(listener4)
+        _oval4.viewTreeObserver.addOnGlobalLayoutListener(listener4)*/
         viewTreeObserver.addOnGlobalLayoutListener(listener0)
-        _img.viewTreeObserver.addOnGlobalLayoutListener(listenerImg)
+      //  _imgMain.viewTreeObserver.addOnGlobalLayoutListener(listenerImg)
     }
 
     fun setBModel(bModel: BeautyModel) {
@@ -159,21 +159,21 @@ class ResultView : LinearLayout {
         mBeautyModel = bModel
 
         val w = DisplayHelper.widthPixels * 2 / 5
-        _img.layoutParams.width = w
-        _img.layoutParams.height = w * 4 / 3
-
+      //  _imgMain.layoutParams.width = w
+      //  _imgMain.layoutParams.height = w * 4 / 3
+/*
         Glide.with(this)
             .load(File(bModel.pathImg))
             .diskCacheStrategy(DiskCacheStrategy.NONE)
             .skipMemoryCache(true)
             .transform(RoundedCorners(DisplayHelper.dpToPx(8)))
-            .into(_img)
-
+            .into(_imgMain)*/
+/*
         _txtName1.text = bModel.params[0].name
         _txtName2.text = bModel.params[1].name
         _txtName3.text = bModel.params[2].name
         _txtName4.text = bModel.params[3].name
-
+*/
         val arr = arrayListOf<BeautyParamsModel>(
             bModel.params[0],
             bModel.params[1],
@@ -198,7 +198,7 @@ class ResultView : LinearLayout {
         arr[3].valui =
             ((bModel.score * 4 - arr[0].valui - arr[1].valui - arr[2].valui) * 100).toInt()
                 .toFloat() / 100
-
+/*
         _txtVolue1.text = "${bModel.params[0].valui.toInt()}%"
         _txtVolue2.text = "${bModel.params[1].valui.toInt()}%"
         _txtVolue3.text = "${bModel.params[2].valui.toInt()}%"
@@ -234,7 +234,7 @@ class ResultView : LinearLayout {
         }
 
         _txtIndex.text = bModel.score.toString()
-
+*/
         updateLine()
 
     }
@@ -242,7 +242,8 @@ class ResultView : LinearLayout {
     private fun updateLine() {
         if (mBeautyModel != null && x0 != -1f && x1 != -1f && xImg != -1f && x2 != -1f && x3 != -1f && x4 != -1f) {
             //* wImg/mBeautyModel!!.width.toFloat()
-            _draw.set1(
+                /*
+                _draw.set1(
                 mBeautyModel!!.params[0].x * wImg / mBeautyModel!!.width + xImg - x0,
                 mBeautyModel!!.params[0].y * hImg / mBeautyModel!!.height + yImg - y0,
                 x1 - x0,
@@ -266,7 +267,7 @@ class ResultView : LinearLayout {
                 x4 - x0,
                 y4 - y0
             )
-            _draw.invalidate()
+            _draw.invalidate()*/
         }
     }
 }

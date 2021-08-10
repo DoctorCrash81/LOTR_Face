@@ -1,7 +1,6 @@
 package com.wizl.beautyscanner.ui
 
 import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
@@ -15,9 +14,13 @@ import com.wizl.beautyscanner.logick.UserPersisten
 import com.wizl.beautyscanner.logick.analytics.AnalyticsService
 import com.wizl.beautyscanner.logick.helpers.DisplayHelper
 import kotlinx.android.synthetic.main.activity_paywall.*
-
 import java.math.BigDecimal
-import java.util.Currency
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
+import kotlin.collections.List
+import kotlin.collections.MutableList
+import kotlin.collections.set
 
 
 class PaywallActivity : AppCompatActivity() {
@@ -25,6 +28,7 @@ class PaywallActivity : AppCompatActivity() {
     companion object {
         const val SKU_ID_1 = "greetify_week"
         const val SKU_ID_2 = "greetify_week_3d"
+        const val IMAGE_MODE = "image_mode"
     }
 
     private lateinit var billingClient: BillingClient
@@ -32,6 +36,15 @@ class PaywallActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_paywall)
+
+        // Меняем картинку
+        val bSecondImage = intent.getBooleanExtra(IMAGE_MODE,false)
+
+        //var bm = BitmapFactory.decodeResource(paywall_img1)
+        var res = R.mipmap.paywall_img1
+        if (bSecondImage) res = R.mipmap.paywall_img2
+
+        _imgPaywall1.setImageResource(res)
 
         AnalyticsService.paywallViewed()
 
@@ -43,7 +56,6 @@ class PaywallActivity : AppCompatActivity() {
             AnalyticsService.paywallClouseTap()
             setResult(Activity.RESULT_CANCELED)
             finish()
-
         }
 
         billingClient = BillingClient.newBuilder(this)

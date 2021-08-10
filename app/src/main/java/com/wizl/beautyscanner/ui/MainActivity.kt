@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    /*
     fun startTrialPush() {
         val calendar: Calendar = Calendar.getInstance()
         calendar.timeInMillis = System.currentTimeMillis()
@@ -69,6 +70,6 @@ class MainActivity : AppCompatActivity() {
         )
         Toast.makeText(this, "Alarm set", Toast.LENGTH_LONG).show()
     }
-
+    */
 }
 

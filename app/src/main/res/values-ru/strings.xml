@@ -7,13 +7,22 @@
     <string name="data_processing">Анализ данных...</string>
     <string name="try_again">Попробуй еще раз</string>
     <string name="network_connection">Не могу загрузить данные. Пожалуйста, проверьте подключение к сети и попробуйте снова</string>
+    <string name="no_image">нет кадра</string>
     <string name="photo_saved_successfully">Фото успешно сохранено</string>
     <string name="please_use_greetify">Пожалуйста, используйте\nхештег <b>#Greetify</b></string>
     <string name="save_to_gallery">Сохранить в галерею</string>
     <string name="photo_saved">Фото успешно сохранено!</string>
     <string name="p_saved">Фото сохранено!</string>
 
+    <string name="handsome">Красавчик</string>
+    <string name="beautiful">Красавица</string>
+
     <string name="your_beauty_score_in">Ваш индекс красоты </string>
+    <string name="your_dc_lookalike">Твой DC двойник</string>
+    <string name="your">ТВОЙ</string>
+    <string name="dc_lookalike">DC-ДВОЙНИК</string>
+
+
 
     <string name="face_shape">Форма лица</string>
     <string name="cheekbones">Скулы</string>

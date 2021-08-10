@@ -8,12 +8,15 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.graphics.Point
+import android.media.Image
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.provider.MediaStore
+import android.util.Base64
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.wizl.beautyscanner.App
 import com.wizl.beautyscanner.R
@@ -27,6 +30,9 @@ import com.wizl.beautyscanner.model.BeautyModelSerializable
 import com.wizl.beautyscanner.model.BeautyParamsModel
 import com.wizl.beautyscanner.model.StandartModel
 import kotlinx.android.synthetic.main.activity_load.*
+import kotlinx.android.synthetic.main.activity_load._imgMain
+import kotlinx.android.synthetic.main.view_bs_result.*
+import java.io.ByteArrayOutputStream
 import java.io.File
 import kotlin.math.abs
 import kotlin.math.acos
@@ -39,6 +45,7 @@ class LoadActivity : AppCompatActivity() {
     companion object {
         const val EXTRA_IMAGE_STR_URI = "EXTRA_IMAGE_STR_URI"
         const val REQUEST_CODE_PERMISSION_STORAGE = 2
+        const val USER_SEX_ID = "USER_SEX_ID"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,6 +78,8 @@ class LoadActivity : AppCompatActivity() {
         val imageStrUrl = intent.getStringExtra(EXTRA_IMAGE_STR_URI)
         val imageUri = Uri.parse(imageStrUrl)
 
+        val gender = intent.getBooleanExtra(LoadActivity.USER_SEX_ID,true)
+
         val matrix = Matrix()
         matrix.postRotate(getImageOrientation(imageUri).toFloat())
 
@@ -89,6 +98,9 @@ class LoadActivity : AppCompatActivity() {
         var newWidth = 500
         var newHeight = 500
 
+
+        // Старая функция ресайза - масштабирует до 500 по длинной стороне, другая меньше
+        /*
         if (origImage.height > newHeight || origImage.width > newWidth) {
             if (origImage.height > origImage.width) {
                 newWidth = origImage.width * newHeight / origImage.height
@@ -96,55 +108,84 @@ class LoadActivity : AppCompatActivity() {
                 newHeight = origImage.height * newWidth / origImage.width
             }
         }
-        var selectedImage = Bitmap.createScaledBitmap(origImage, newWidth, newHeight, true)
+        */
+
+        // Новая функция - 500 по короткой стороне, по длинной делаем 500 в центре, края обрезаем
+        var dW: Int = 0
+        var dH: Int = 0
+        var dS: Int = 0
+
+        if (origImage.height > newHeight || origImage.width > newWidth) {
+            if (origImage.height > origImage.width) {
+                dS = origImage.width
+                dH = ((dS*origImage.height)/origImage.width-dS)/2
+            }
+            else {
+                dS = origImage.height
+                dW = ((dS*origImage.width)/origImage.height-dS)/2
+            }
+        }
+        val transImage = Bitmap.createBitmap(origImage,dW,dH,dS,dS)
+
+        var selectedImage = Bitmap.createScaledBitmap(transImage, newWidth, newHeight, true)
+
 
         FileService.instance.savePhotoBeauty(selectedImage) { fileImg ->
 
             AnalyticsService.loadSavedPrevie()
-            _img.setImageBitmap(selectedImage)
+            //_img.setImageBitmap(selectedImage)
+            //_imgMain.setImageBitmap(selectedImage)
 
-            Network.instance.getResult(fileImg, {
+            Network.instance.getResult(fileImg, gender, {
+
+                // Декодируем картинки героя и 3 результата
+
+                var baos = ByteArrayOutputStream()
+                selectedImage.compress(Bitmap.CompressFormat.JPEG,100,baos)
+                var encodedMainImg = baos.toByteArray()
+
+                var s = it.getJPG(0)
+                val decodedImage1 = Base64.decode(s,Base64.DEFAULT)
+                val decodedBMP = BitmapFactory.decodeByteArray(decodedImage1,0,decodedImage1.size)
+
+                s = it.getJPG(1)
+                val decodedImage2 = Base64.decode(s,Base64.DEFAULT)
+                //decodedBMP = BitmapFactory.decodeByteArray(decodedImage2,0,decodedImage1.size)
+
+                s = it.getJPG(2)
+                val decodedImage3 = Base64.decode(s,Base64.DEFAULT)
+                //decodedBMP = BitmapFactory.decodeByteArray(decodedImage3,0,decodedImage1.size)
 
                 _progress.visibility = View.INVISIBLE
                 _text.text = ""
 
-                val bModel = BeautyModel()
-                bModel.pathImg = fileImg.absolutePath
-
-//                val bm = ImageHelper.getRoundedCornerBitmap(pars(it, bModel, origImage), DisplayHelper.dpToPx(8))
-                val bm = pars(it, bModel, origImage)
-                _img.setImageBitmap(bm)
+                AnalyticsService.loadResultOk(0F)
 
 
-//                _draw.addUpLone(
-//                    it.meta.faceLandmarks[45][0].toFloat() * origImage.width / bm.width,
-//                    it.meta.faceLandmarks[45][1].toFloat() * origImage.height / bm.height,
-//                    300f,
-//                    300f
-//                )
+                //FileService.instance.savePhotoBeauty(decodedBMP) { f: File ->
 
+                    //bModel.pathImg = f.absolutePath
+                AnalyticsService.loadsavedResult()
 
-//                _draw.set1(
-//                    bModel.params[1].x.toFloat(),
-//                    bModel.params[1].y.toFloat(),
-//                    300f,
-//                    300f
-//                )
-//                _draw.addUpLone(bModel.params[1].x.toFloat(), bModel.params[1].y.toFloat(), 0f, 0f)
+                // передаем картинки и Запускаем резалт активити
+                val intent = Intent(this, ResultActivity::class.java)
+                //intent.putExtra(ResultActivity.IMAGE_HERO,encodedMainImg)
 
-                AnalyticsService.loadResultOk(bModel.score)
+                intent.putExtra(ResultActivity.IMAGE_HERO_1,decodedImage1)
+                intent.putExtra(ResultActivity.NAME_HERO_1,it.getHeroName(0))
 
-                FileService.instance.savePhotoBeauty(bm) { f: File ->
-                    bModel.pathImg = f.absolutePath
-                    AnalyticsService.loadsavedResult()
-                    startActivity(
-                        Intent(this, ResultActivity::class.java).putExtra(
-                            "bModel",
-                            bModel
-                        )
-                    )
-                    finish()
-                }
+                intent.putExtra(ResultActivity.IMAGE_HERO_2,decodedImage2)
+                intent.putExtra(ResultActivity.NAME_HERO_2,it.getHeroName(1))
+
+                intent.putExtra(ResultActivity.IMAGE_HERO_3,decodedImage3)
+                intent.putExtra(ResultActivity.NAME_HERO_3,it.getHeroName(2))
+
+                //TODO
+                AnalyticsService.galleryPhotoPicked()
+
+                startActivity(intent)
+                finish()
+                //}
             }, {
                 AnalyticsService.loadError(it.message)
                 _progress.visibility = View.INVISIBLE

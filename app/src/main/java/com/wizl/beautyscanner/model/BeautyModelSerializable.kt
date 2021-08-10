@@ -21,6 +21,7 @@ import java.io.Serializable
 }
 */
 
+
 class BeautyModelSerializable(
     val meta: MetaBeautyModelSerializable,
     val result: ResultSerializable

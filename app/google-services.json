@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "1056192534621",
+    "project_id": "beauty-scanner-622da",
+    "storage_bucket": "beauty-scanner-622da.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1056192534621:android:231c7e8765adf1f4ef95b4",
+        "android_client_info": {
+          "package_name": "com.wizl.beautyscanner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1056192534621-arccgf8hl48ih1m6s20rdto4eqg94kq8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBiHUFPepRmt-unQGf0V1NF_qTSCfpmd9Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1056192534621-arccgf8hl48ih1m6s20rdto4eqg94kq8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1056192534621:android:ad56211f0e463a98ef95b4",
+        "android_client_info": {
+          "package_name": "com.wizl.pasteras"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1056192534621-arccgf8hl48ih1m6s20rdto4eqg94kq8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBiHUFPepRmt-unQGf0V1NF_qTSCfpmd9Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1056192534621-arccgf8hl48ih1m6s20rdto4eqg94kq8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -21,7 +21,10 @@ class GalleryActivity : AppCompatActivity() {
     companion object {
         private const val RESULT_PAYWALL = 13
         private const val PICK_IMG = 1
+        private const val RESULT_WHOIS = 17
     }
+
+    private var imgData: Intent? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +44,10 @@ class GalleryActivity : AppCompatActivity() {
         }
 
         if (!UserPersisten.isPrem) {
-            startActivityForResult(Intent(this, PaywallActivity::class.java), RESULT_PAYWALL)
+            val intent = Intent(this, PaywallActivity::class.java)
+            intent.putExtra(PaywallActivity.IMAGE_MODE,false)
+            startActivityForResult(intent, RESULT_PAYWALL)
+            //startActivityForResult(Intent(this, PaywallActivity::class.java), RESULT_PAYWALL)
         }
 
     }
@@ -82,24 +88,32 @@ class GalleryActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         when (requestCode) {
-            PICK_IMG -> {
+//            PICK_IMG -> {
+            RESULT_WHOIS -> {
                 if (resultCode == Activity.RESULT_OK) {
+
+                    //val intent_i = imgData
 
                     AnalyticsService.galleryResultOk()
 
-                    if (data != null && data.data != null) {
+//                    if (data != null && data.data != null) {
+                    if (imgData != null && imgData!!.data != null) {
 
-                        val imageUri: Uri = data.data!!
+                        val imageUri: Uri = imgData!!.data!!
+                        val user_sex_id: Boolean = data?.getBooleanExtra("whois",true) ?: true
+
+                        // Загрузка изображения на сервак
 
                         val intent = Intent(this, LoadActivity::class.java)
                         intent.putExtra(LoadActivity.EXTRA_IMAGE_STR_URI, imageUri.toString())
+                        intent.putExtra(LoadActivity.USER_SEX_ID,user_sex_id)
                         AnalyticsService.galleryPhotoPicked()
                         startActivity(intent)
-                        finish()
 
 //                        val imageStream = contentResolver.openInputStream(imageUri)
 //                        val selectedImage: Bitmap = BitmapFactory.decodeStream(imageStream)
 //                        _img.setImageBitmap(selectedImage)
+                        finish()
                     }
                 } else if (resultCode == Activity.RESULT_CANCELED) {
                     AnalyticsService.galleryResultCanceled()
@@ -111,6 +125,17 @@ class GalleryActivity : AppCompatActivity() {
                 if (resultCode == Activity.RESULT_OK) {
                     //купили!!!
                 }
+            }
+            PICK_IMG -> {
+                // Сохраняем данные картинки
+                imgData = Intent(data)
+
+                // Здесь выбор пола
+                val intent = Intent(this,WhoIsActivity::class.java)
+                startActivityForResult(intent, RESULT_WHOIS)
+
+                // TODO: Выбор пола в AnalyticsService
+                //finish()
             }
         }
 

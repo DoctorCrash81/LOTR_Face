@@ -3,6 +3,7 @@ package com.wizl.beautyscanner.ui
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.media.MediaScannerConnection
 import android.os.Build
@@ -26,25 +27,82 @@ import com.wizl.beautyscanner.logick.UserPersisten
 import com.wizl.beautyscanner.logick.analytics.AnalyticsService
 import com.wizl.beautyscanner.model.BeautyModel
 import kotlinx.android.synthetic.main.activity_bs_result.*
+import kotlinx.android.synthetic.main.activity_bs_result._result
+import kotlinx.android.synthetic.main.view_bs_result.*
 import java.io.File
 import kotlin.math.roundToInt
 
 
 class ResultActivity : AppCompatActivity() {
+    companion object {
+        const val IMAGE_HERO = "IMAGE_HERO"
+        const val IMAGE_HERO_1 = "IMAGE_HERO_1"
+        const val IMAGE_HERO_2 = "IMAGE_HERO_2"
+        const val IMAGE_HERO_3 = "IMAGE_HERO_3"
+        const val NAME_HERO_1 = "NAME_HERO_1"
+        const val NAME_HERO_2 = "NAME_HERO_2"
+        const val NAME_HERO_3 = "NAME_HERO_3"
+    }
 
     private var mResultFile: File? = null
     private var mScore = 0f
+
 
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bs_result)
 
-        val bModel = intent.getParcelableExtra<BeautyModel>("bModel")!!
-        mScore = bModel.score
-        AnalyticsService.resultViewed(mScore)
+        //TODO:
+        AnalyticsService.resultViewed(0F)
 
-        _result.setBModel(bModel)
+        //_result.setBModel(bModel)
+
+        // Отображаем результаты
+        /*
+        var decImgHero = intent.getByteArrayExtra("IMAGE_HERO")
+        if (decImgHero != null) {
+            var decBMPHero = BitmapFactory.decodeByteArray(decImgHero, 0, decImgHero.size)
+            _imgMainHero.setImageBitmap(decBMPHero)
+        }
+        else
+            */
+
+        // Основная картинка
+        _imgMainHero.setImageDrawable(null)
+        _imgMainHero.setImageURI(FileService.instance.getBeautyPath())
+
+        var decBMPHero1: Bitmap
+        var t: String
+
+        var decImgHero1 = intent.getByteArrayExtra("IMAGE_HERO_1")
+        if (decImgHero1 != null) {
+            decBMPHero1 = BitmapFactory.decodeByteArray(decImgHero1,0,decImgHero1.size)
+            _imgHero1.setImageBitmap(decBMPHero1)
+            t = intent.getStringExtra(NAME_HERO_1)
+            //decImgHero1 = null
+        }
+        else t = getString(R.string.no_image)
+        _txtNameHero1.setText(t)
+
+        decImgHero1 = intent.getByteArrayExtra("IMAGE_HERO_2")
+        if (decImgHero1 != null) {
+            var decBMPHero2 = BitmapFactory.decodeByteArray(decImgHero1, 0, decImgHero1.size)
+            _imgHero2.setImageBitmap(decBMPHero2)
+            t = intent.getStringExtra(NAME_HERO_2)
+        }
+        else t = getString(R.string.no_image)
+        _txtNameHero2.setText(t)
+
+        decImgHero1 = intent.getByteArrayExtra("IMAGE_HERO_3")
+        if (decImgHero1 != null) {
+            var decBMPHero3 = BitmapFactory.decodeByteArray(decImgHero1, 0, decImgHero1.size)
+            _imgHero3.setImageBitmap(decBMPHero3)
+            t = intent.getStringExtra(NAME_HERO_3)
+        }
+        else t = getString(R.string.no_image)
+        _txtNameHero3.setText(t)
+
 
         _btGallery.setOnClickListener {
             AnalyticsService.resultGalleryTap(mScore)
@@ -87,14 +145,20 @@ class ResultActivity : AppCompatActivity() {
         if (!UserPersisten.isPrem) {
             Handler().postDelayed({
                 noPrem()
-            }, 600)
+            }, 1000)  //TODO
         }
 
         _btBgPrem.setOnClickListener {
-            startActivity(Intent(this, PaywallActivity::class.java))
+            val intent = Intent(this, PaywallActivity::class.java)
+            intent.putExtra(PaywallActivity.IMAGE_MODE,true)
+            startActivity(intent)
+//            startActivity(Intent(this, PaywallActivity::class.java))
         }
         _btPrem.setOnClickListener {
-            startActivity(Intent(this, PaywallActivity::class.java))
+            val intent = Intent(this, PaywallActivity::class.java)
+            intent.putExtra(PaywallActivity.IMAGE_MODE,true)
+            startActivity(intent)
+            //startActivity(Intent(this, PaywallActivity::class.java))
         }
 
     }
@@ -110,7 +174,11 @@ class ResultActivity : AppCompatActivity() {
         _contResult.setBackgroundDrawable(BitmapDrawable(bmResult))
         _result.visibility = View.INVISIBLE
         _bg_prem.visibility = View.VISIBLE
-        startActivity(Intent(this, PaywallActivity::class.java))
+
+        val intent = Intent(this, PaywallActivity::class.java)
+        intent.putExtra(PaywallActivity.IMAGE_MODE,true)
+        startActivity(intent)
+        //startActivity(Intent(this, PaywallActivity::class.java))
     }
 
     override fun onRestart() {
