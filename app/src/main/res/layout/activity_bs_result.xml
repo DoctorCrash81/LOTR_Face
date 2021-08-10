@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorBtnText">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -55,10 +56,9 @@
         <FrameLayout
             android:id="@+id/_contResult"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
 
-            <com.wizl.beautyscanner.ui.ResultView
+            <com.wizl.lookalike.ui.ResultView
                 android:id="@+id/_result"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -68,17 +68,6 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="4" />
-
-        <TextView
-            android:id="@+id/_txtUseGreetify"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center"
-            android:text="@string/please_use_greetify"
-            android:textColor="#000"
-            android:textSize="13sp"
-            android:visibility="invisible" />
 
         <View
             android:layout_width="match_parent"
@@ -102,7 +91,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:backgroundTint="#FFF"
+                android:backgroundTint="@color/colorBtnFace"
                 android:padding="12dp"
                 android:src="@drawable/ic_baseline_photo_library_24" />
 
@@ -112,20 +101,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:backgroundTint="#FFF"
+                android:backgroundTint="@color/colorBtnFace"
                 android:drawableStart="@drawable/ic_baseline_save_alt_24"
                 android:drawableLeft="@drawable/ic_baseline_save_alt_24"
-                android:text="@string/save_to_gallery" />
+                android:text="@string/save_to_gallery"
+                android:textColor="@color/colorBtnText" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/_btSend"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:backgroundTint="#FFF"
+                android:backgroundTint="@color/colorBtnFace"
                 android:drawableStart="@drawable/ic_baseline_send_24"
                 android:drawableLeft="@drawable/ic_baseline_send_24"
                 android:text="@string/send"
+                android:textColor="@color/colorBtnText"
                 android:visibility="gone" />
 
             <View
@@ -146,14 +137,18 @@
             android:id="@+id/_btBgPrem"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#66000000"/>
+            android:background="#66000000" />
 
         <Button
             android:id="@+id/_btPrem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/get_result" />
+            android:background="@color/colorBtnFace"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="@string/get_result"
+            android:textColor="@color/colorBtnText" />
 
     </FrameLayout>
 

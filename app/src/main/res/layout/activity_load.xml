@@ -2,7 +2,8 @@
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorBtnText">
 
 
     <LinearLayout
@@ -71,12 +72,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="matrix"
-        android:visibility="gone"/>
-
-    <com.wizl.beautyscanner.ui.DrawView
-        android:id="@+id/_draw"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 </FrameLayout>

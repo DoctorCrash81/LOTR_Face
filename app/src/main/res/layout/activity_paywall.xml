@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
+    android:background="@color/colorBtnText"
     android:orientation="vertical">
 
     <FrameLayout
@@ -92,7 +92,7 @@
                 android:layout_gravity="center_horizontal"
                 android:padding="8dp"
                 android:text="@string/_3_days_free"
-                android:textColor="#9E26BE"
+                android:textColor="@color/colorBtnFace"
                 android:textSize="20sp" />
 
             <TextView
@@ -128,9 +128,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_margin="32dp"
-        android:backgroundTint="#FF5F9B"
+        android:backgroundTint="@color/colorBtnFace"
         android:text="@string/contin"
-        android:textColor="#fff" />
+        android:textColor="@color/colorBtnText" />
 
     <View
         android:layout_width="match_parent"

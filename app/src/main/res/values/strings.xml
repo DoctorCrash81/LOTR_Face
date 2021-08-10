@@ -12,7 +12,6 @@
     <string name="try_again">Try again</string>
     <string name="network_connection">Cant load data. Please check your network connection and try again</string>
     <string name="photo_saved_successfully">Photo saved successfully</string>
-    <string name="please_use_greetify">Please use <b>#Greetify</b></string>
     <string name="save_to_gallery">Save To Gallery</string>
     <string name="photo_saved">Photo saved successfully!</string>
     <string name="p_saved">Photo saved!</string>
@@ -20,25 +19,15 @@
     <string name="handsome">Handsome</string>
     <string name="beautiful">Beautiful</string>
 
-    <string name="your_beauty_score_in">Your Beauty Score is </string>
-
     <string name="your_dc_lookalike">Comic Book Lookalike</string>
     <string name="dc_lookalike">DC-LOOKALIKE</string>
     <string name="your">YOUR</string>
 
-    <string name="face_shape">Face shape</string>
-    <string name="cheekbones">Cheekbones</string>
-    <string name="eyes">Eyes</string>
-    <string name="nose">Nose</string>
     <string name="no_image">no image</string>
-    <string name="proportions">Proportions</string>
-    <string name="eyebrows">Eyebrows</string>
-    <string name="chin">Chin</string>
-    <string name="lips">Lips</string>
+    <string name="image_error">Image processing error. Try another</string>
+
     <string name="gallery">Gallery</string>
     <string name="send">Send</string>
-
-    <string name="perfect">PERFECT</string>
 
     <string name="_3_days_free">Try 3 Days for Only</string>
     <string name="then">Then</string>
