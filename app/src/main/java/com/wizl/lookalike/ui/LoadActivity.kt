@@ -167,7 +167,6 @@ class LoadActivity : AppCompatActivity() {
             val newWidth = sourceImg.width * IMAGE_SIZE/sourceImg.height
             transImage = Bitmap.createScaledBitmap(sourceImg, newWidth,IMAGE_SIZE,true)
             resultImage = cropImageToSquare(transImage)
-
         }
         return resultImage
     }
