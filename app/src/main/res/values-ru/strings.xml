@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Твой двойник из комиксов</string>
+    <string name="app_name">Двойник из Средиземья</string>
     <string name="could_not_detect_face">Не удалось обнаружить лицо</string>
     <string name="choose_another_photo">Выберите другое фото</string>
     <string name="choose_photo">Выберите фото</string>
@@ -9,6 +9,8 @@
     <string name="network_connection">Не могу загрузить данные. Пожалуйста, проверьте подключение к сети и попробуйте снова</string>
 
     <string name="image_error">Ошибка обработки изображения. Попробуйте другое</string>
+    <string name="you_are">Кто вы?</string>
+
     <string name="no_image">нет кадра</string>
     <string name="photo_saved_successfully">Фото успешно сохранено</string>
     <string name="save_to_gallery">Сохранить в галерею</string>
@@ -18,9 +20,7 @@
     <string name="handsome">Красавчик</string>
     <string name="beautiful">Красавица</string>
 
-    <string name="your_dc_lookalike">Твой DC двойник</string>
-    <string name="your">ТВОЙ</string>
-    <string name="dc_lookalike">DC-ДВОЙНИК</string>
+    <string name="your_lookalike">Кто Ты в мире властелина колец?</string>
 
     <string name="gallery">Галерея</string>
     <string name="send">Отправить</string>

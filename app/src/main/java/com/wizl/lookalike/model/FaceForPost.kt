@@ -26,13 +26,3 @@ data class FaceResult(
     val jpg_data: String,
     @SerializedName("category")
     val category: String): Serializable
-
-/*
-    class BeautyModelSerializable(
-        val meta: MetaBeautyModelSerializable,
-        val result: ResultSerializable
-    ) : Serializable {
-        fun getPoint(index:Int): Point {
-            return Point(meta.faceLandmarks[index][0],meta.faceLandmarks[index][1])
-        }
-    }*/

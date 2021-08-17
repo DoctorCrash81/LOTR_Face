@@ -73,7 +73,7 @@ class Network {
                 photoFileRB
             )
 
-        val strGender = if (gender) "dc2_male" else "dc2_female"
+        val strGender = if (gender) "LOTR_male" else "LOTR_female"
 
         val dataset = RequestBody.create("multipart/form-data".toMediaTypeOrNull(),strGender)
         val count = RequestBody.create("multipart/form-data".toMediaTypeOrNull(),"3")

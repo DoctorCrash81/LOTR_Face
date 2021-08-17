@@ -42,7 +42,7 @@ class PaywallActivity : AppCompatActivity() {
 
         //var bm = BitmapFactory.decodeResource(paywall_img1)
         var res = R.mipmap.paywall_img1
-        if (bSecondImage) res = R.mipmap.paywall_img2
+        //if (bSecondImage) res = R.mipmap.paywall_img2
 
         _imgPaywall1.setImageResource(res)
 

@@ -4,7 +4,7 @@
     <string name="facebook_app_id" translatable="false">498939567525120</string>
     <string name="fb_login_protocol_scheme" translatable="false">fb498939567525120</string>
 
-    <string name="app_name">ComicBookStyle</string>
+    <string name="app_name">The LOTR Face</string>
     <string name="could_not_detect_face">Could not detect face</string>
     <string name="choose_another_photo">Choose another photo</string>
     <string name="choose_photo">Choose a photo</string>
@@ -19,9 +19,9 @@
     <string name="handsome">Handsome</string>
     <string name="beautiful">Beautiful</string>
 
-    <string name="your_dc_lookalike">Comic Book Lookalike</string>
-    <string name="dc_lookalike">DC-LOOKALIKE</string>
-    <string name="your">YOUR</string>
+    <string name="your_lookalike">What would you look like in Tolkien`s world?</string>
+    <string name="you_are">You are...</string>
+
 
     <string name="no_image">no image</string>
     <string name="image_error">Image processing error. Try another</string>
