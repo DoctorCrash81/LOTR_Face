@@ -22,6 +22,8 @@ class GalleryActivity : AppCompatActivity() {
         private const val RESULT_WHOIS = 17
     }
 
+    // test
+
     private var imgData: Intent? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
