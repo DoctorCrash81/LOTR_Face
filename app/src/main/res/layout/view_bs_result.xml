@@ -40,7 +40,7 @@
                     android:shadowDy="0"
                     android:shadowRadius="2"
                     android:text="@string/human"
-                    android:textAllCaps="true"
+                    android:textAllCaps="false"
                     android:textColor="@android:color/white"
                     android:textSize="16dp"
                     android:textStyle="bold" />
@@ -71,7 +71,7 @@
                     android:shadowDy="0"
                     android:shadowRadius="2"
                     android:text="TEST"
-                    android:textAllCaps="true"
+                    android:textAllCaps="false"
                     android:textColor="@android:color/white"
                     android:textSize="16dp"
                     android:textStyle="bold" />
@@ -109,7 +109,7 @@
                     android:shadowDy="0"
                     android:shadowRadius="2"
                     android:text="TEST"
-                    android:textAllCaps="true"
+                    android:textAllCaps="false"
                     android:textColor="@android:color/white"
                     android:textSize="16dp"
                     android:textStyle="bold" />
@@ -140,7 +140,7 @@
                     android:shadowDy="0"
                     android:shadowRadius="2"
                     android:text="TEST"
-                    android:textAllCaps="true"
+                    android:textAllCaps="false"
                     android:textColor="@android:color/white"
                     android:textSize="16dp"
                     android:textStyle="bold" />
