@@ -23,6 +23,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.core.view.drawToBitmap
+import com.wizl.lookalike.App
 import com.wizl.lookalike.R
 import com.wizl.lookalike.logick.FileService
 import com.wizl.lookalike.logick.UserPersisten
@@ -31,19 +32,29 @@ import kotlinx.android.synthetic.main.activity_bs_result.*
 import kotlinx.android.synthetic.main.activity_bs_result._result
 import kotlinx.android.synthetic.main.view_bs_result.*
 import java.io.File
+import java.util.*
 import kotlin.math.roundToInt
+import java.util.Hashtable as Hashtable1
 
 
 class ResultActivity : AppCompatActivity() {
 
+    private val myDict = java.util.Hashtable<String,String>()
+
     private var mResultFile: File? = null
     private var mScore = 0f
+
 
     private fun setImageAndText(_imageView: ImageView, _textView: TextView, _index: Int){
         val decImgHero = intent.getByteArrayExtra("IMAGE_HERO_$_index")
         val decBMPHero = BitmapFactory.decodeByteArray(decImgHero,0,decImgHero.size)
             _imageView.setImageBitmap(decBMPHero)
-        val t = intent.getStringExtra("NAME_HERO_$_index")
+        var t = intent.getStringExtra("NAME_HERO_$_index")
+
+        // Переводим на русский если англ
+        if (App.instance.language == "ru"){
+            t = myDict[t]
+        }
         _textView.text = t
     }
 
@@ -51,6 +62,12 @@ class ResultActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bs_result)
+
+        // Инициализируем словарь
+        myDict["Elf"] = "Эльф"
+        myDict["Hobbit"] = "Хоббит"
+        myDict["Wizard"] = "Маг"
+        myDict["Dwarf"] = "Дварф"
 
         AnalyticsService.resultViewed(0F)
 

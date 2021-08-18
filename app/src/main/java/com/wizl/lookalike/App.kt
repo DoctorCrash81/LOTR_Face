@@ -11,6 +11,7 @@ import com.wizl.lookalike.ui.PaywallActivity
 class App : Application() {
 
     private val mNetwork = Network.instance
+
     val language: String
         get() {
             return if (
