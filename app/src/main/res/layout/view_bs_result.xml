@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -31,17 +29,20 @@
                     android:scaleType="fitXY" />
 
                 <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="120dp"
+                    android:id="@+id/_txtNameHero"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|right"
-                    android:alpha="50"
-                    android:background="@color/colorPrimaryDark"
+                    android:layout_marginRight="8dp"
                     android:fontFamily="sans-serif-medium"
-                    android:paddingLeft="20dp"
-                    android:text="DC STYLE"
+                    android:shadowColor="@android:color/black"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="2"
+                    android:text="@string/human"
+                    android:textAllCaps="true"
                     android:textColor="@android:color/white"
-                    android:textSize="20dp"
+                    android:textSize="16dp"
                     android:textStyle="bold" />
 
             </FrameLayout>
@@ -63,10 +64,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|right"
+                    android:layout_marginRight="8dp"
                     android:fontFamily="sans-serif-medium"
                     android:shadowColor="@android:color/black"
-                    android:shadowDx="2"
-                    android:shadowDy="2"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
                     android:shadowRadius="2"
                     android:text="TEST"
                     android:textAllCaps="true"
@@ -100,10 +102,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|right"
+                    android:layout_marginRight="8dp"
                     android:fontFamily="sans-serif-medium"
                     android:shadowColor="@android:color/black"
-                    android:shadowDx="2"
-                    android:shadowDy="2"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
                     android:shadowRadius="2"
                     android:text="TEST"
                     android:textAllCaps="true"
@@ -130,10 +133,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|right"
+                    android:layout_marginRight="8dp"
                     android:fontFamily="sans-serif-medium"
                     android:shadowColor="@android:color/black"
-                    android:shadowDx="2"
-                    android:shadowDy="2"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
                     android:shadowRadius="2"
                     android:text="TEST"
                     android:textAllCaps="true"

@@ -40,10 +40,11 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/_btGallery"
+            android:textColor="#fff"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:backgroundTint="#FFF"
+            android:backgroundTint="@color/colorBtnFace"
             android:drawableStart="@drawable/ic_baseline_photo_library_24"
             android:drawableLeft="@drawable/ic_baseline_photo_library_24"
             android:text="@string/choose_another_photo"
@@ -51,10 +52,11 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/_btTryAgain"
+            android:textColor="#fff"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:backgroundTint="#FFF"
+            android:backgroundTint="@color/colorBtnFace"
             android:drawableStart="@drawable/ic_baseline_refresh_24"
             android:drawableLeft="@drawable/ic_baseline_refresh_24"
             android:text="@string/try_again"
