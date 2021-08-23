@@ -32,9 +32,7 @@ import kotlinx.android.synthetic.main.activity_bs_result.*
 import kotlinx.android.synthetic.main.activity_bs_result._result
 import kotlinx.android.synthetic.main.view_bs_result.*
 import java.io.File
-import java.util.*
 import kotlin.math.roundToInt
-import java.util.Hashtable as Hashtable1
 
 
 class ResultActivity : AppCompatActivity() {
@@ -86,28 +84,30 @@ class ResultActivity : AppCompatActivity() {
         }
 
         _btSave.setOnClickListener {
+            // Срабатывает если оплачено
+            if (UserPersisten.isPrem) {
+                AnalyticsService.resultSaveTap(mScore)
 
-            AnalyticsService.resultSaveTap(mScore)
+                _btSave.isEnabled = false
+                _btSave.alpha = .6f
+                _progress.visibility = View.VISIBLE
 
-            _btSave.isEnabled = false
-            _btSave.alpha = .6f
-            _progress.visibility = View.VISIBLE
+                val bmResult = _result.drawToBitmap()
 
-            val bmResult = _result.drawToBitmap()
+                FileService.instance.saveResult(bmResult) {
 
-            FileService.instance.saveResult(bmResult) {
+                    MediaScannerConnection.scanFile(
+                        this,
+                        arrayOf(it.toString()),
+                        null
+                    ) { path, uri ->
+                        Log.i("ExternalStorage", "Scanned $path:")
+                        Log.i("ExternalStorage", "-> uri=$uri")
+                    }
 
-                MediaScannerConnection.scanFile(
-                    this,
-                    arrayOf(it.toString()),
-                    null
-                ) { path, uri ->
-                    Log.i("ExternalStorage", "Scanned $path:")
-                    Log.i("ExternalStorage", "-> uri=$uri")
+                    mResultFile = it
+                    imageSaved()
                 }
-
-                mResultFile = it
-                seved()
             }
         }
 
@@ -119,7 +119,7 @@ class ResultActivity : AppCompatActivity() {
         if (!UserPersisten.isPrem) {
             Handler().postDelayed({
                 noPrem()
-            }, 1000)  //TODO интервал показа фото
+            }, 500)  //TODO интервал показа фото
         }
 
         _btBgPrem.setOnClickListener {
@@ -200,7 +200,7 @@ class ResultActivity : AppCompatActivity() {
 
     }
 
-    private fun seved() {
+    private fun imageSaved() {
 
         AnalyticsService.resultSaveOk()
 

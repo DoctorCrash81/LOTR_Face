@@ -26,8 +26,7 @@ import kotlin.collections.set
 class PaywallActivity : AppCompatActivity() {
 
     companion object {
-        const val SKU_ID_1 = "greetify_week"
-        const val SKU_ID_2 = "greetify_week_3d"
+        const val SKU_ID_2 = "sub_3d_week"
         const val IMAGE_MODE = "image_mode"
     }
 
@@ -36,15 +35,6 @@ class PaywallActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_paywall)
-
-        // Меняем картинку
-        val bSecondImage = intent.getBooleanExtra(IMAGE_MODE,false)
-
-        //var bm = BitmapFactory.decodeResource(paywall_img1)
-        var res = R.mipmap.paywall_img1
-        //if (bSecondImage) res = R.mipmap.paywall_img2
-
-        _imgPaywall1.setImageResource(res)
 
         AnalyticsService.paywallViewed()
 
@@ -83,17 +73,18 @@ class PaywallActivity : AppCompatActivity() {
         ) { result, skuDetailsList ->
             when (result.responseCode) {
                 BillingClient.BillingResponseCode.OK -> {
-                    if (skuDetailsList != null) {
-                        val skuDetailsMap: HashMap<String, SkuDetails> = HashMap()
-                        for (skuDetails in skuDetailsList) {
-                            skuDetailsMap[skuDetails.sku] = skuDetails
-                        }
-                        updateSubs(skuDetailsMap)
-                        _bt.setOnClickListener {
-                            AnalyticsService.paywallSubsTap()
-                            val skuDetails = skuDetailsMap[SKU_ID_2]
-                            if (skuDetails != null) {
-                                launchBilling(billingClient, skuDetails)
+   //                 if (skuDetailsList != null) {
+                      if (!skuDetailsList.isNullOrEmpty()) {
+                            val skuDetailsMap: HashMap<String, SkuDetails> = HashMap()
+                            for (skuDetails in skuDetailsList) {
+                                    skuDetailsMap[skuDetails.sku] = skuDetails
+                                    }
+                            updateSubs(skuDetailsMap)
+                            _bt.setOnClickListener {
+                                AnalyticsService.paywallSubsTap()
+                                val skuDetails = skuDetailsMap[SKU_ID_2]
+                                if (skuDetails != null) {
+                                    launchBilling(billingClient, skuDetails)
                             }
                         }
                     }
@@ -128,11 +119,8 @@ class PaywallActivity : AppCompatActivity() {
             skuDetails.description
             skuDetails.originalJson
 
-
-
             _txt1.text = "${getString(R.string._3_days_free)} ${skuDetails.introductoryPrice}"
-            _txt2.text =
-                "${getString(R.string.then)} ${skuDetails.price} ${getString(R.string._week)}"
+            _txt2.text = "${getString(R.string.then)} ${skuDetails.price} ${getString(R.string._week)}"
 
             _progress.visibility = View.GONE
             _info.visibility = View.VISIBLE
