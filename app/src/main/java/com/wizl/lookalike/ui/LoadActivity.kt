@@ -2,6 +2,8 @@ package com.wizl.lookalike.ui
 
 import android.Manifest
 import android.content.Intent
+import android.content.Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION
+import android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -35,12 +37,18 @@ class LoadActivity : AppCompatActivity() {
         const val IMAGE_SIZE = 500
     }
 
+    private var gender: Boolean = true
+    private var imageForPost: Bitmap? = null
+
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_load)
 
         AnalyticsService.loadViewed()
+
+        gender = intent.getBooleanExtra(LoadActivity.GENDER,true)
+        prepareImage()
 
         checkPermission()
 
@@ -49,11 +57,11 @@ class LoadActivity : AppCompatActivity() {
             startActivity(Intent(this, GalleryActivity::class.java).putExtra("start_gallery", true))
             finish()
         }
+
         _btTryAgain.setOnClickListener {
             AnalyticsService.loadTryAgainTap()
             startLoad()
         }
-
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
@@ -64,35 +72,7 @@ class LoadActivity : AppCompatActivity() {
         _btGallery.visibility = View.INVISIBLE
         _text.setText(R.string.data_processing)
 
-        val imageStrUrl = intent.getStringExtra(EXTRA_IMAGE_STR_URI)
-        val imageUri = Uri.parse(imageStrUrl)
-
-        val gender = intent.getBooleanExtra(LoadActivity.GENDER,true)
-        val imageStream = contentResolver.openInputStream(imageUri)
-        val imageStream2 = contentResolver.openInputStream(imageUri)
-
-        val matrix = Matrix()
-        try {
-            val degrees = getImageOrientation2(imageStream2).toFloat()
-            matrix.postRotate(degrees)
-        }
-        catch (ex: Exception)
-        {
-            val s = ex.localizedMessage
-        }
-
-        var origImage: Bitmap = BitmapFactory.decodeStream(imageStream)
-        origImage = Bitmap.createBitmap(
-            origImage,
-            0,
-            0,
-            origImage.width,
-            origImage.height,
-            matrix,
-            true
-        )
-
-        val selectedImage = scaleAndCropImage(origImage)
+        val selectedImage = imageForPost//prepareImage()
 
         if (selectedImage != null) {
             FileService.instance.savePhotoBeauty(selectedImage) { fileImg ->
@@ -125,7 +105,7 @@ class LoadActivity : AppCompatActivity() {
                     AnalyticsService.loadError(it.message)
                     _progress.visibility = View.INVISIBLE
                     _btTryAgain.visibility = View.VISIBLE
-                    _text.text = it.message
+                    _text.setText(R.string.network_connection)
                 }, { code, message ->
                     AnalyticsService.serverError("$code: $message")
                     _progress.visibility = View.INVISIBLE
@@ -141,6 +121,38 @@ class LoadActivity : AppCompatActivity() {
                 })
             }
         }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun prepareImage() {
+        val imageStrUrl = intent.getStringExtra(EXTRA_IMAGE_STR_URI)
+        val imageUri = Uri.parse(imageStrUrl)
+
+        val imageStream = contentResolver.openInputStream(imageUri)
+        val imageStreamMatrix = contentResolver.openInputStream(imageUri)
+
+        val matrix = Matrix()
+        try {
+            val degrees = getImageOrientation2(imageStreamMatrix).toFloat()
+            matrix.postRotate(degrees)
+        } catch (ex: Exception) {
+            val s = ex.localizedMessage
+        }
+        imageStreamMatrix?.close()
+
+        var origImage: Bitmap = BitmapFactory.decodeStream(imageStream)
+        origImage = Bitmap.createBitmap(
+            origImage,
+            0,
+            0,
+            origImage.width,
+            origImage.height,
+            matrix,
+            true
+        )
+
+        imageForPost = scaleAndCropImage(origImage)
+        imageStream?.close()
     }
 
     // Преобразуем исходную картинку к заданному размеру
@@ -167,6 +179,7 @@ class LoadActivity : AppCompatActivity() {
             val newWidth = sourceImg.width * IMAGE_SIZE/sourceImg.height
             transImage = Bitmap.createScaledBitmap(sourceImg, newWidth,IMAGE_SIZE,true)
             resultImage = cropImageToSquare(transImage)
+
         }
         return resultImage
     }
@@ -191,7 +204,7 @@ class LoadActivity : AppCompatActivity() {
         var degree = 0
         var exif: ExifInterface? = null
         try {
-            exif = ExifInterface(_img)
+            exif = ExifInterface(_img!!)
         } catch (ex: IOException) {
             ex.printStackTrace()
         }
@@ -208,6 +221,7 @@ class LoadActivity : AppCompatActivity() {
         return degree
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     private fun checkPermission() {
         if (PermissionHelper.isPermissionGranted(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
             && PermissionHelper.isPermissionGranted(this, Manifest.permission.READ_EXTERNAL_STORAGE)
